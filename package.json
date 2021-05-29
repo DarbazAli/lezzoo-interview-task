@@ -1,0 +1,28 @@
+{
+  "name": "lezzoo-interview-task",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "An admin panel to create and list stores",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "dev": "nodemon server/server.js"
+  },
+  "keywords": [
+    "REST",
+    "MYSQL",
+    "NODE",
+    "REACT",
+    "REDUX",
+    "EXPRESS"
+  ],
+  "author": "Darbaz Ali",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.7"
+  }
+}
