@@ -4,6 +4,8 @@ import sql from '../db/db.js'
 const createStore = (req, res) => {
   const { name, logo } = req.body
 
+  console.log(req.body)
+
   sql.query(
     `INSERT INTO store (name, logo) VALUES('${name}', '${logo}')`,
     (err) => {
