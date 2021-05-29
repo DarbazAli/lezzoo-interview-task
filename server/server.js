@@ -2,8 +2,10 @@
 
 import express from 'express'
 import morgan from 'morgan'
+import path from 'path'
 
 import storeRoutes from './routes/storeRoutes.js'
+import uploadRoute from './routes/uploadRoute.js'
 
 const app = express()
 
@@ -31,6 +33,7 @@ ENV VARIABLES
 =================================================*/
 const port = process.env.PORT || 5000
 const env = process.env.NODE_ENV || 'development'
+const __dirname = path.resolve()
 
 /*=================================================
 APP SETTINGS
@@ -43,6 +46,7 @@ if (env === 'development') {
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
 
 /*=================================================
 USING ROUTES MIDDLEWARES
@@ -52,6 +56,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/api/stores', storeRoutes)
+app.use('/api/upload', uploadRoute)
 
 /*=================================================
 LISTEN FOR REQUESTS ON THE AVAILABLE PORT NUMBER

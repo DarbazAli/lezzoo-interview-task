@@ -9,15 +9,12 @@ const createStore = (req, res) => {
     (err) => {
       if (err) {
         if (err.code === 'ER_DUP_ENTRY') {
-          sql.end()
           res.json({ error: 'The name already exists!' })
         } else {
-          sql.end()
           res.json(err)
         }
       }
 
-      sql.end()
       res.send('Store created successfully!')
     }
   )
