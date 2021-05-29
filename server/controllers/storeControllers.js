@@ -7,7 +7,17 @@ const createStore = (req, res) => {
   sql.query(
     `INSERT INTO store (name, logo) VALUES('${name}', '${logo}')`,
     (err) => {
-      if (err) res.send(err)
+      if (err) {
+        if (err.code === 'ER_DUP_ENTRY') {
+          sql.end()
+          res.json({ error: 'The name already exists!' })
+        } else {
+          sql.end()
+          res.json(err)
+        }
+      }
+
+      sql.end()
       res.send('Store created successfully!')
     }
   )
