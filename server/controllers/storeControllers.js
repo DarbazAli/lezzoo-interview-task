@@ -21,4 +21,13 @@ const list = (req, res) => {
   })
 }
 
-export default { createStore, list }
+const getStoreById = (req, res) => {
+  const { id } = req.params
+
+  sql.query(`SELECT * FROM store WHERE id = ${id}`, (err, result) => {
+    if (err) res.send(err)
+    res.json(result)
+  })
+}
+
+export default { createStore, list, getStoreById }
