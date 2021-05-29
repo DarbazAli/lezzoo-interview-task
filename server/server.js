@@ -3,9 +3,9 @@
 import express from 'express'
 import morgan from 'morgan'
 
-const app = express()
+import storeRoutes from './routes/storeRoutes.js'
 
-// TODO: Connect to mysql database
+const app = express()
 
 /* 
   API ENDPOINTS
@@ -41,12 +41,17 @@ if (env === 'development') {
   app.use(morgan('dev'))
 }
 
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+
 /*=================================================
 USING ROUTES MIDDLEWARES
 =================================================*/
 app.get('/', (req, res) => {
   res.send('API IS WORKING')
 })
+
+app.use('/api/stores', storeRoutes)
 
 /*=================================================
 LISTEN FOR REQUESTS ON THE AVAILABLE PORT NUMBER
