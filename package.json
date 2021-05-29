@@ -5,8 +5,10 @@
   "description": "An admin panel to create and list stores",
   "main": "server.js",
   "scripts": {
-    "start": "node server/server.js",
-    "dev": "nodemon server/server.js"
+    "start": "node server/server",
+    "server": "nodemon server/server",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "keywords": [
     "REST",
@@ -23,6 +25,7 @@
     "mysql": "^2.18.1"
   },
   "devDependencies": {
+    "concurrently": "^6.2.0",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.7"
   }
