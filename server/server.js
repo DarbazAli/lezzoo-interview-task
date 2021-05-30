@@ -5,6 +5,7 @@ import morgan from 'morgan'
 import path from 'path'
 
 import storeRoutes from './routes/storeRoutes.js'
+import categoryRoutes from './routes/categoryRoutes.js'
 import uploadRoute from './routes/uploadRoute.js'
 
 const app = express()
@@ -56,6 +57,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/api/stores', storeRoutes)
+app.use('/api/category', categoryRoutes)
 app.use('/api/upload', uploadRoute)
 
 /*=================================================
