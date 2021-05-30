@@ -3,10 +3,10 @@ import {
   ITEM_LIST_FAIL,
   ITEM_LIST_REQUEST,
   ITEM_LIST_SUCCESS,
-} from '../constants/categoryConstants'
+} from '../constants/itemConstants'
 
-// list all store
-export const listCategories = (categoryID) => async (dispatch) => {
+// list all items
+export const listItems = (categoryID) => async (dispatch) => {
   try {
     dispatch({ type: ITEM_LIST_REQUEST })
     const config = {

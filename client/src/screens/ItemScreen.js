@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import axios from 'axios'
 import { Link } from 'react-router-dom'
-import { listCategories, createCategory } from '../actions/categoryActions'
+import { listItems } from '../actions/itemActions'
 
-const CategoryScreen = ({ match }) => {
+const ItemScreen = ({ match }) => {
   const dispatch = useDispatch()
-  const storeID = match.params.id
+  const categoryID = match.params.id
 
   const [name, setName] = useState('')
   const [image, setImage] = useState('')
@@ -15,14 +15,12 @@ const CategoryScreen = ({ match }) => {
 
   const fileEl = useRef(null)
 
-  const { loading, categories, error } = useSelector(
-    (state) => state.categoryList
-  )
-  const { success } = useSelector((state) => state.categoryCreate)
-
+  const { loading, items, error } = useSelector((state) => state.itemList)
+  //   const { success } = useSelector((state) => state.itemCreate)
+  console.log(items)
   useEffect(() => {
-    dispatch(listCategories(storeID))
-  }, [dispatch, match, storeID, success])
+    dispatch(listItems(categoryID))
+  }, [dispatch, match, categoryID])
 
   // file uploader hander
   const uploadFileHandler = async (e) => {
@@ -48,30 +46,30 @@ const CategoryScreen = ({ match }) => {
   }
 
   // submit hander
-  const submitHandler = (e) => {
-    e.preventDefault()
-    if (!name || !image) {
-      setMessage('Please fill all the fields')
-    } else {
-      dispatch(
-        createCategory({
-          name,
-          image,
-          storeID,
-        })
-      )
+  //   const submitHandler = (e) => {
+  //     e.preventDefault()
+  //     if (!name || !image) {
+  //       setMessage('Please fill all the fields')
+  //     } else {
+  //       dispatch(
+  //         createCategory({
+  //           name,
+  //           image,
+  //           storeID,
+  //         })
+  //       )
 
-      setName('')
-      setImage('')
-      fileEl.current.value = ''
-    }
-  }
+  //       setName('')
+  //       setImage('')
+  //       fileEl.current.value = ''
+  //     }
+  //   }
 
   return (
     <div>
-      <h1>Categories</h1>
+      <h1>Items</h1>
 
-      <form onSubmit={submitHandler}>
+      {/* <form onSubmit={submitHandler}>
         {message && <h4 style={{ color: 'red' }}>{message}</h4>}
         <div className='input-field'>
           <label htmlFor='name'>Category:</label>
@@ -97,7 +95,7 @@ const CategoryScreen = ({ match }) => {
         <button className='btn primary' type='submit'>
           Create
         </button>
-      </form>
+      </form> */}
 
       {loading ? (
         <h2>Loading...</h2>
@@ -105,15 +103,15 @@ const CategoryScreen = ({ match }) => {
         <h2 style={{ color: 'red' }}>{error}</h2>
       ) : (
         <div className='stores'>
-          {categories.map((category) => (
-            <Link
-              to={`/item/${category.id}`}
-              key={category.id}
+          {items.map((item) => (
+            <div
+              //   to={`/item/${categoryID}`}
+              key={item.id}
               className='store-card'
             >
-              <img src={category.image} alt={category.name} />
-              <h2>{category.name}</h2>
-            </Link>
+              <img src={item.image} alt={item.name} />
+              <h2>{item.name}</h2>
+            </div>
           ))}
         </div>
       )}
@@ -121,4 +119,4 @@ const CategoryScreen = ({ match }) => {
   )
 }
 
-export default CategoryScreen
+export default ItemScreen
