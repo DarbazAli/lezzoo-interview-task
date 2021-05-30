@@ -3,10 +3,10 @@ import {
   CATEGORY_LIST_FAIL,
   CATEGORY_LIST_REQUEST,
   CATEGORY_LIST_SUCCESS,
-} from '../constants/storeConstants'
+} from '../constants/categoryConstants'
 
 // list all store
-export const listCategories = ({ storeID }) => async (dispatch) => {
+export const listCategories = (storeID) => async (dispatch) => {
   try {
     dispatch({ type: CATEGORY_LIST_REQUEST })
     const config = {
@@ -14,7 +14,7 @@ export const listCategories = ({ storeID }) => async (dispatch) => {
         'Content-Type': 'application/json',
       },
     }
-    const { data } = await axios.get('/api/category', config, storeID)
+    const { data } = await axios.get(`/api/category/${storeID}`, config)
 
     dispatch({
       type: CATEGORY_LIST_SUCCESS,

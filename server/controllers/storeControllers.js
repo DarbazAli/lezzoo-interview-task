@@ -8,14 +8,10 @@ const createStore = (req, res) => {
     `INSERT INTO store (name, logo) VALUES('${name}', '${logo}')`,
     (err) => {
       if (err) {
-        if (err.code === 'ER_DUP_ENTRY') {
-          res.json({ error: 'The name already exists!' })
-        } else {
-          res.json(err)
-        }
+        res.send('Unable to create store')
+      } else {
+        res.send('Store created successfully!')
       }
-
-      res.send('Store created successfully!')
     }
   )
 }
@@ -23,8 +19,11 @@ const createStore = (req, res) => {
 // get all stores
 const list = (req, res) => {
   sql.query('SELECT * FROM store', (err, rows) => {
-    if (err) res.send(err)
-    res.json(rows)
+    if (err) {
+      res.send('There was an error geting stores')
+    } else {
+      res.json(rows)
+    }
   })
 }
 
@@ -32,8 +31,11 @@ const getStoreById = (req, res) => {
   const { id } = req.params
 
   sql.query(`SELECT * FROM store WHERE id = ${id}`, (err, result) => {
-    if (err) res.send(err)
-    res.json(result)
+    if (err) {
+      res.send('Store not found')
+    } else {
+      res.json(result)
+    }
   })
 }
 

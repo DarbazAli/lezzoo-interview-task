@@ -3,7 +3,10 @@ import categoryCtrl from '../controllers/categoryControllers.js'
 
 const router = express.Router()
 
-router.route('/').post(categoryCtrl.createCategory).get(categoryCtrl.list)
+router
+  .route('/:storeID')
+  .post(categoryCtrl.createCategory)
+  .get(categoryCtrl.list)
 
 router.route('/:id').get(categoryCtrl.getCategoryById)
 

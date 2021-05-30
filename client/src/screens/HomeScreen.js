@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { listStores } from '../actions/storeActions'
 import axios from 'axios'
-
+import { Link } from 'react-router-dom'
 import { createStore } from '../actions/storeActions'
 
 const HomeScreen = () => {
@@ -100,10 +100,14 @@ const HomeScreen = () => {
       ) : (
         <div className='stores'>
           {stores.map((store) => (
-            <div key={store.id} className='store-card'>
+            <Link
+              to={`/store/${store.id}`}
+              key={store.id}
+              className='store-card'
+            >
               <img src={store.logo} alt={store.name} />
               <h2>{store.name}</h2>
-            </div>
+            </Link>
           ))}
         </div>
       )}
