@@ -12,25 +12,6 @@ import authUser from './utils/authUser.js'
 import protect from './utils/authMiddleware.js'
 const app = express()
 
-/* 
-  API ENDPOINTS
-
-  Store =>
-    GET  /api/store   => get all the sores
-    POST /api/store   => create new store
-    GET /api/store/:id => get a single store
-
-  CATEGORY
-    GET /api/cat    => get all categories
-    POST /api/cat   => create new category
-    GET /api/cat/:id => get a single cat
-
-  ITEM
-    GET /api/items  => get all items
-    POST /api/items => create new item
-    GET  /api/items/:id => get item by id
-*/
-
 /*=================================================
 ENV VARIABLES
 =================================================*/
@@ -49,14 +30,25 @@ if (env === 'development') {
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '/client/build')))
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+  })
+} else {
+  app.get('/', protect, (req, res) => {
+    res.send('API IS WORKING')
+  })
+}
+
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
 
 /*=================================================
 USING ROUTES MIDDLEWARES
 =================================================*/
-app.get('/', protect, (req, res) => {
-  res.send('API IS WORKING')
-})
+
 app.post('/api/user/login', authUser)
 app.use('/api/stores', storeRoutes)
 app.use('/api/category', categoryRoutes)
