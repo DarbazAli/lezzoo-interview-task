@@ -54,8 +54,10 @@ const HomeScreen = () => {
           logo: image,
         })
       )
+
       setName('')
       setImage('')
+      window.location.reload()
     }
   }
 
@@ -64,6 +66,7 @@ const HomeScreen = () => {
       <h1>Stores</h1>
 
       <form onSubmit={submitHandler}>
+        {message && <h4 style={{ color: 'red' }}>{message}</h4>}
         <div className='input-field'>
           <label htmlFor='name'>Name:</label>
           <input
@@ -76,9 +79,11 @@ const HomeScreen = () => {
           />
         </div>
         <div className='input-field'>
+          <label htmlFor='file'>Logo</label>
           <input
             type='file'
             name='logo'
+            id='file'
             // value={image}
             onChange={uploadFileHandler}
           />
@@ -87,18 +92,20 @@ const HomeScreen = () => {
           Create
         </button>
       </form>
-      {message && <h4 style={{ color: 'red' }}>{message}</h4>}
+
       {loading ? (
         <h2>Loading...</h2>
       ) : error ? (
         <h2 style={{ color: 'red' }}>{error}</h2>
       ) : (
-        stores.map((store) => (
-          <div key={store.id}>
-            <h2>{store.name}</h2>
-            <img src={store.logo} alt={store.name} />
-          </div>
-        ))
+        <div className='stores'>
+          {stores.map((store) => (
+            <div key={store.id} className='store-card'>
+              <img src={store.logo} alt={store.name} />
+              <h2>{store.name}</h2>
+            </div>
+          ))}
+        </div>
       )}
     </div>
   )
