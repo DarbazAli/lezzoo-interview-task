@@ -68,11 +68,32 @@ const CategoryScreen = ({ match }) => {
   }
 
   return (
-    <div>
-      <h1>Categories</h1>
+    <div className='main-content'>
+      <div className='col-left'>
+        <h1>Categories</h1>
+        {loading ? (
+          <h2>Loading...</h2>
+        ) : error ? (
+          <h2 style={{ color: 'red' }}>{error}</h2>
+        ) : (
+          <div className='category'>
+            {categories.map((category) => (
+              <Link
+                to={`/item/${category.id}`}
+                key={category.id}
+                className='category-card'
+              >
+                <img src={category.image} alt={category.name} />
+                <h2>{category.name}</h2>
+              </Link>
+            ))}
+          </div>
+        )}
+      </div>
 
       <form onSubmit={submitHandler}>
         {message && <h4 style={{ color: 'red' }}>{message}</h4>}
+        <h2>Create a new category</h2>
         <div className='input-field'>
           <label htmlFor='name'>Category:</label>
           <input
@@ -95,28 +116,9 @@ const CategoryScreen = ({ match }) => {
           />
         </div>
         <button className='btn primary' type='submit'>
-          Create
+          Create New Category
         </button>
       </form>
-
-      {loading ? (
-        <h2>Loading...</h2>
-      ) : error ? (
-        <h2 style={{ color: 'red' }}>{error}</h2>
-      ) : (
-        <div className='stores'>
-          {categories.map((category) => (
-            <Link
-              to={`/item/${category.id}`}
-              key={category.id}
-              className='store-card'
-            >
-              <img src={category.image} alt={category.name} />
-              <h2>{category.name}</h2>
-            </Link>
-          ))}
-        </div>
-      )}
     </div>
   )
 }

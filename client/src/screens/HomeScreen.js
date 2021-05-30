@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { listStores } from '../actions/storeActions'
 import axios from 'axios'
@@ -11,6 +11,10 @@ const HomeScreen = () => {
   const [name, setName] = useState('')
   const [image, setImage] = useState('')
   const [message, setMessage] = useState('')
+
+  const [showForm, setShowForm] = useState(false)
+
+  const fileEl = useRef(null)
 
   const { loading, stores, error } = useSelector((state) => state.storeList)
   const { success } = useSelector((state) => state.storeCreate)
@@ -56,62 +60,68 @@ const HomeScreen = () => {
       )
 
       setName('')
-      setImage('')
-      window.location.reload()
+      setShowForm(false)
+      fileEl.current.value = ''
     }
   }
 
   return (
-    <div>
-      <form onSubmit={submitHandler}>
-        {message && <h4 style={{ color: 'red' }}>{message}</h4>}
-        <div className='input-field'>
-          <label htmlFor='name'>Name:</label>
-          <input
-            type='text'
-            name='name'
-            id='name'
-            placeholder='Store name'
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </div>
-        <div className='input-field'>
-          <label htmlFor='file'>Logo</label>
-          <input
-            type='file'
-            name='logo'
-            id='file'
-            // value={image}
-            onChange={uploadFileHandler}
-          />
-        </div>
-        <button className='btn primary' type='submit'>
-          Create
-        </button>
-      </form>
+    <div className='main-content'>
+      <div className='col-left'>
+        {loading ? (
+          <h2>Loading...</h2>
+        ) : error ? (
+          <h2 style={{ color: 'red' }}>{error}</h2>
+        ) : (
+          <div>
+            <h1>Stores</h1>
 
-      {loading ? (
-        <h2>Loading...</h2>
-      ) : error ? (
-        <h2 style={{ color: 'red' }}>{error}</h2>
-      ) : (
-        <div style={{ maxWidth: '740px', margin: '0 auto' }}>
-          <h1>Stores</h1>
-          <div className='stores'>
-            {stores.map((store) => (
-              <Link
-                to={`/store/${store.id}`}
-                key={store.id}
-                className='store-card'
-              >
-                <img src={store.logo} alt={store.name} />
-                <h2>{store.name}</h2>
-              </Link>
-            ))}
+            <div className='stores'>
+              {stores.map((store) => (
+                <Link
+                  to={`/store/${store.id}`}
+                  key={store.id}
+                  className='store-card'
+                >
+                  <img src={store.logo} alt={store.name} />
+                  <h2>{store.name}</h2>
+                </Link>
+              ))}
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
+
+      <div className='col-right'>
+        <form className='form-inline' onSubmit={submitHandler}>
+          {message && <h4 style={{ color: 'red' }}>{message}</h4>}
+          <h2>Create a new store</h2>
+          <div className='input-field'>
+            <label htmlFor='name'>Name:</label>
+            <input
+              type='text'
+              name='name'
+              id='name'
+              placeholder='Store name'
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
+          <div className='input-field'>
+            <label htmlFor='file'>Logo</label>
+            <input
+              type='file'
+              name='logo'
+              id='file'
+              ref={fileEl}
+              onChange={uploadFileHandler}
+            />
+          </div>
+          <button className='btn primary' type='submit'>
+            Create New Store
+          </button>
+        </form>
+      </div>
     </div>
   )
 }
