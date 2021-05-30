@@ -4,10 +4,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 
 import { listItems, createItem } from '../actions/itemActions'
+import { Link } from 'react-router-dom'
 
 const ItemScreen = ({ match }) => {
   const dispatch = useDispatch()
   const categoryID = match.params.id
+
+  console.log(categoryID)
 
   const [name, setName] = useState('')
   const [image, setImage] = useState('')
@@ -67,6 +70,14 @@ const ItemScreen = ({ match }) => {
   return (
     <div className='main-content'>
       <div className='col-left'>
+        <button
+          className='back-button'
+          onClick={() => {
+            window.history.back()
+          }}
+        >
+          Back
+        </button>
         <h1>Items</h1>
         {loading ? (
           <h2>Loading...</h2>

@@ -70,6 +70,14 @@ const CategoryScreen = ({ match }) => {
   return (
     <div className='main-content'>
       <div className='col-left'>
+        <button
+          className='back-button'
+          onClick={() => {
+            window.history.back()
+          }}
+        >
+          Back
+        </button>
         <h1>Categories</h1>
         {loading ? (
           <h2>Loading...</h2>
