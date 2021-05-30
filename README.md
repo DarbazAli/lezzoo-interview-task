@@ -1,5 +1,7 @@
 # lezzoo-interview-task
 
+## [Live app](https://lezzoo-admin-panel.herokuapp.com).
+
 ### DB Modeling
 
 ```
