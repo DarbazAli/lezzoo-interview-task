@@ -6,7 +6,7 @@ import {
   categoryListReducer,
 } from './reducers/categoryReducers'
 import { storeCreateReducer, storeListReducer } from './reducers/storeReducers'
-import { itemListReducer } from './reducers/itemReducers'
+import { itemCreateReducer, itemListReducer } from './reducers/itemReducers'
 
 const reducers = combineReducers({
   storeList: storeListReducer,
@@ -14,6 +14,7 @@ const reducers = combineReducers({
   categoryList: categoryListReducer,
   categoryCreate: categoryCreateReducer,
   itemList: itemListReducer,
+  itemCreate: itemCreateReducer,
 })
 
 const initialState = {}

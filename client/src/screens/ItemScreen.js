@@ -2,8 +2,8 @@ import React, { useState, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import axios from 'axios'
-import { Link } from 'react-router-dom'
-import { listItems } from '../actions/itemActions'
+
+import { listItems, createItem } from '../actions/itemActions'
 
 const ItemScreen = ({ match }) => {
   const dispatch = useDispatch()
@@ -11,23 +11,23 @@ const ItemScreen = ({ match }) => {
 
   const [name, setName] = useState('')
   const [image, setImage] = useState('')
+  const [price, setPrice] = useState(0)
   const [message, setMessage] = useState('')
 
   const fileEl = useRef(null)
 
   const { loading, items, error } = useSelector((state) => state.itemList)
-  //   const { success } = useSelector((state) => state.itemCreate)
-  console.log(items)
+  const { success } = useSelector((state) => state.itemCreate)
+
   useEffect(() => {
     dispatch(listItems(categoryID))
-  }, [dispatch, match, categoryID])
+  }, [dispatch, match, categoryID, success])
 
   // file uploader hander
   const uploadFileHandler = async (e) => {
     const file = e.target.files[0]
     const formData = new FormData()
     formData.append('image', file)
-    // setUploading(true)
 
     try {
       const config = {
@@ -38,50 +38,64 @@ const ItemScreen = ({ match }) => {
 
       const { data } = await axios.post('/api/upload', formData, config)
       setImage(data)
-      // setUploading(false)
     } catch (error) {
       console.error(error)
-      // setUploading(false)
     }
   }
 
-  // submit hander
-  //   const submitHandler = (e) => {
-  //     e.preventDefault()
-  //     if (!name || !image) {
-  //       setMessage('Please fill all the fields')
-  //     } else {
-  //       dispatch(
-  //         createCategory({
-  //           name,
-  //           image,
-  //           storeID,
-  //         })
-  //       )
+  const submitHandler = (e) => {
+    e.preventDefault()
+    if (!name || !image) {
+      setMessage('Please fill all the fields')
+    } else {
+      dispatch(
+        createItem({
+          name,
+          price,
+          image,
+          categoryID,
+        })
+      )
 
-  //       setName('')
-  //       setImage('')
-  //       fileEl.current.value = ''
-  //     }
-  //   }
+      setName('')
+      setImage('')
+      setPrice(0)
+      fileEl.current.value = ''
+    }
+  }
 
   return (
     <div>
       <h1>Items</h1>
 
-      {/* <form onSubmit={submitHandler}>
+      <form onSubmit={submitHandler}>
         {message && <h4 style={{ color: 'red' }}>{message}</h4>}
+
         <div className='input-field'>
-          <label htmlFor='name'>Category:</label>
+          <label htmlFor='name'>Item name:</label>
           <input
             type='text'
             name='name'
             id='name'
-            placeholder='Enter Category'
+            placeholder='Enter item name'
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
         </div>
+
+        <div className='input-field'>
+          <label htmlFor='price'>Price (IQD):</label>
+          <input
+            type='number'
+            name='price'
+            id='price'
+            placeholder='Enter price'
+            value={price}
+            min={0}
+            onChange={(e) => setPrice(e.target.value)}
+          />
+        </div>
+
         <div className='input-field'>
           <label htmlFor='file'>Image</label>
           <input
@@ -95,7 +109,7 @@ const ItemScreen = ({ match }) => {
         <button className='btn primary' type='submit'>
           Create
         </button>
-      </form> */}
+      </form>
 
       {loading ? (
         <h2>Loading...</h2>
@@ -104,11 +118,7 @@ const ItemScreen = ({ match }) => {
       ) : (
         <div className='stores'>
           {items.map((item) => (
-            <div
-              //   to={`/item/${categoryID}`}
-              key={item.id}
-              className='store-card'
-            >
+            <div key={item.id} className='store-card'>
               <img src={item.image} alt={item.name} />
               <h2>{item.name}</h2>
             </div>

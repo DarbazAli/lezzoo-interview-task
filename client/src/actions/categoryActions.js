@@ -34,11 +34,10 @@ export const listCategories = (storeID) => async (dispatch) => {
   }
 }
 
-// create new store
+// create new category
 export const createCategory = ({ name, image, storeID }) => async (
   dispatch
 ) => {
-  console.log('create cat')
   try {
     dispatch({ type: CATEGORY_CREATE_REQUEST })
 
