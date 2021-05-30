@@ -6,6 +6,7 @@ import path from 'path'
 
 import storeRoutes from './routes/storeRoutes.js'
 import categoryRoutes from './routes/categoryRoutes.js'
+import itemRoutes from './routes/itemRoutes.js'
 import uploadRoute from './routes/uploadRoute.js'
 
 const app = express()
@@ -58,6 +59,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/stores', storeRoutes)
 app.use('/api/category', categoryRoutes)
+app.use('/api/item', itemRoutes)
 app.use('/api/upload', uploadRoute)
 
 /*=================================================
