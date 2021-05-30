@@ -3,8 +3,6 @@ import itemCtrl from '../controllers/itemControllers.js'
 
 const router = express.Router()
 
-router.route('/:categoryID').post(itemCtrl.createItem)
-
-// router.route('/:id').get(categoryCtrl.getCategoryById)
+router.route('/:categoryID').post(itemCtrl.createItem).get(itemCtrl.list)
 
 export default router

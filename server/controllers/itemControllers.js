@@ -18,4 +18,19 @@ const createItem = (req, res) => {
   )
 }
 
-export default { createItem }
+// get all items for a category
+const list = (req, res) => {
+  const { categoryID } = req.params
+  sql.query(
+    `SELECT * FROM item WHERE categoryID = ${categoryID}`,
+    (err, rows) => {
+      if (err) {
+        res.send(err)
+      } else {
+        res.json(rows)
+      }
+    }
+  )
+}
+
+export default { createItem, list }
