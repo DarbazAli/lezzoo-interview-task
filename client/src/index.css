@@ -82,6 +82,18 @@ nav .logo img {
   width: 32px;
 }
 
+nav .menu {
+  width: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav .menu a {
+  margin-left: 2rem;
+}
+
 nav h3 {
   text-decoration: none;
   color: var(--color-primary);
@@ -114,7 +126,8 @@ form .form-inline {
 
 input[type='text'],
 input[type='password'],
-input[type='number'] {
+input[type='number'],
+input[type='email'] {
   width: 100%;
   display: block;
   border: 1px solid #393939;
@@ -287,7 +300,7 @@ ITEM CARD
   overflow: hidden;
   text-align: center;
   margin-right: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 3rem;
 }
 
 .item-card img {

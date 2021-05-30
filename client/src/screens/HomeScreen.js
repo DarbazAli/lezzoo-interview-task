@@ -5,7 +5,7 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { createStore } from '../actions/storeActions'
 
-const HomeScreen = () => {
+const HomeScreen = ({ history }) => {
   const dispatch = useDispatch()
 
   const [name, setName] = useState('')
@@ -17,9 +17,15 @@ const HomeScreen = () => {
   const { loading, stores, error } = useSelector((state) => state.storeList)
   const { success } = useSelector((state) => state.storeCreate)
 
+  const { userInfo } = useSelector((state) => state.userLogin)
+
   useEffect(() => {
-    dispatch(listStores())
-  }, [dispatch, success])
+    if (!userInfo) {
+      history.push('/')
+    } else {
+      dispatch(listStores())
+    }
+  }, [dispatch, success, userInfo, history])
 
   // file uploader hander
   const uploadFileHandler = async (e) => {

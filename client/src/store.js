@@ -8,6 +8,8 @@ import {
 import { storeCreateReducer, storeListReducer } from './reducers/storeReducers'
 import { itemCreateReducer, itemListReducer } from './reducers/itemReducers'
 
+import { userLoginReducer } from './reducers/userReducer'
+
 const reducers = combineReducers({
   storeList: storeListReducer,
   storeCreate: storeCreateReducer,
@@ -15,9 +17,16 @@ const reducers = combineReducers({
   categoryCreate: categoryCreateReducer,
   itemList: itemListReducer,
   itemCreate: itemCreateReducer,
+  userLogin: userLoginReducer,
 })
 
-const initialState = {}
+const userInfoFromStorage = localStorage.getItem('userInfo')
+  ? JSON.parse(localStorage.getItem('userInfo'))
+  : null
+
+const initialState = {
+  userLogin: { userInfo: userInfoFromStorage },
+}
 
 const middleware = [thunk]
 
