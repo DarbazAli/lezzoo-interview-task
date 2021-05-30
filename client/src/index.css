@@ -188,7 +188,8 @@ STORE CARD
   padding-top: 2rem;
 }
 .stores,
-.category {
+.category,
+.items {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -241,4 +242,28 @@ CATEGORY CARD
   bottom: 1rem;
   left: 1rem;
   z-index: 999;
+}
+
+/*=================================================
+ITEM CARD
+=================================================*/
+
+.item-card {
+  width: 250px;
+  overflow: hidden;
+  text-align: center;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+}
+
+.item-card img {
+  width: 100%;
+  height: 250px;
+  border-radius: 20px;
+  margin-bottom: 1rem;
+}
+
+.item-card p {
+  font-weight: 300;
+  margin-bottom: 0.5rem;
 }

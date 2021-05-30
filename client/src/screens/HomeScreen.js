@@ -12,8 +12,6 @@ const HomeScreen = () => {
   const [image, setImage] = useState('')
   const [message, setMessage] = useState('')
 
-  const [showForm, setShowForm] = useState(false)
-
   const fileEl = useRef(null)
 
   const { loading, stores, error } = useSelector((state) => state.storeList)
@@ -60,7 +58,6 @@ const HomeScreen = () => {
       )
 
       setName('')
-      setShowForm(false)
       fileEl.current.value = ''
     }
   }

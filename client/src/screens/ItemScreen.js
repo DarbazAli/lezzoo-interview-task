@@ -65,66 +65,70 @@ const ItemScreen = ({ match }) => {
   }
 
   return (
-    <div>
-      <h1>Items</h1>
+    <div className='main-content'>
+      <div className='col-left'>
+        <h1>Items</h1>
+        {loading ? (
+          <h2>Loading...</h2>
+        ) : error ? (
+          <h2 style={{ color: 'red' }}>{error}</h2>
+        ) : (
+          <div className='items'>
+            {items.map((item) => (
+              <div key={item.id} className='item-card'>
+                <img src={item.image} alt={item.name} />
+                <p>{item.name}</p>
+                <h2>{item.price} IQD</h2>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
 
-      <form onSubmit={submitHandler}>
-        {message && <h4 style={{ color: 'red' }}>{message}</h4>}
+      <div className='col-right'>
+        <form onSubmit={submitHandler}>
+          {message && <h4 style={{ color: 'red' }}>{message}</h4>}
+          <h2>Create a new item</h2>
+          <div className='input-field'>
+            <label htmlFor='name'>Item name:</label>
+            <input
+              type='text'
+              name='name'
+              id='name'
+              placeholder='Enter item name'
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
 
-        <div className='input-field'>
-          <label htmlFor='name'>Item name:</label>
-          <input
-            type='text'
-            name='name'
-            id='name'
-            placeholder='Enter item name'
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </div>
+          <div className='input-field'>
+            <label htmlFor='price'>Price (IQD):</label>
+            <input
+              type='number'
+              name='price'
+              id='price'
+              placeholder='Enter price'
+              value={price}
+              min={0}
+              onChange={(e) => setPrice(e.target.value)}
+            />
+          </div>
 
-        <div className='input-field'>
-          <label htmlFor='price'>Price (IQD):</label>
-          <input
-            type='number'
-            name='price'
-            id='price'
-            placeholder='Enter price'
-            value={price}
-            min={0}
-            onChange={(e) => setPrice(e.target.value)}
-          />
-        </div>
-
-        <div className='input-field'>
-          <label htmlFor='file'>Image</label>
-          <input
-            type='file'
-            name='logo'
-            id='file'
-            ref={fileEl}
-            onChange={uploadFileHandler}
-          />
-        </div>
-        <button className='btn primary' type='submit'>
-          Create
-        </button>
-      </form>
-
-      {loading ? (
-        <h2>Loading...</h2>
-      ) : error ? (
-        <h2 style={{ color: 'red' }}>{error}</h2>
-      ) : (
-        <div className='stores'>
-          {items.map((item) => (
-            <div key={item.id} className='store-card'>
-              <img src={item.image} alt={item.name} />
-              <h2>{item.name}</h2>
-            </div>
-          ))}
-        </div>
-      )}
+          <div className='input-field'>
+            <label htmlFor='file'>Image</label>
+            <input
+              type='file'
+              name='logo'
+              id='file'
+              ref={fileEl}
+              onChange={uploadFileHandler}
+            />
+          </div>
+          <button className='btn primary' type='submit'>
+            Create
+          </button>
+        </form>
+      </div>
     </div>
   )
 }
