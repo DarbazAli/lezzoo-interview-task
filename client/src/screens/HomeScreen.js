@@ -63,8 +63,6 @@ const HomeScreen = () => {
 
   return (
     <div>
-      <h1>Stores</h1>
-
       <form onSubmit={submitHandler}>
         {message && <h4 style={{ color: 'red' }}>{message}</h4>}
         <div className='input-field'>
@@ -98,17 +96,20 @@ const HomeScreen = () => {
       ) : error ? (
         <h2 style={{ color: 'red' }}>{error}</h2>
       ) : (
-        <div className='stores'>
-          {stores.map((store) => (
-            <Link
-              to={`/store/${store.id}`}
-              key={store.id}
-              className='store-card'
-            >
-              <img src={store.logo} alt={store.name} />
-              <h2>{store.name}</h2>
-            </Link>
-          ))}
+        <div style={{ maxWidth: '740px', margin: '0 auto' }}>
+          <h1>Stores</h1>
+          <div className='stores'>
+            {stores.map((store) => (
+              <Link
+                to={`/store/${store.id}`}
+                key={store.id}
+                className='store-card'
+              >
+                <img src={store.logo} alt={store.name} />
+                <h2>{store.name}</h2>
+              </Link>
+            ))}
+          </div>
         </div>
       )}
     </div>

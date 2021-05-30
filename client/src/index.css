@@ -148,6 +148,12 @@ input:focus {
   transform: scale(0.98);
 }
 
+label {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
 /*=================================================
 STORE CARD
 =================================================*/
@@ -157,20 +163,24 @@ STORE CARD
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  max-width: 740px;
+  margin: 0 auto;
 }
 .store-card {
-  width: 352px;
-  height: 249px;
-  border-radius: 20px;
-  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.12);
-  position: relative;
-  overflow: hidden;
-  margin: 8px;
-  color: #fff;
+  width: 168px;
+  height: 168px;
+  border-radius: 13px;
+  background: #fff;
+  border: 1px solid #a0a0a0;
+  padding: 2rem;
+  margin: 0.5rem;
+  text-align: center;
+}
+
+.store-card img {
+  width: 80%;
 }
 
 .store-card h2 {
-  position: absolute;
-  left: 1rem;
-  bottom: 1rem;
+  color: var(--color-copy);
 }
