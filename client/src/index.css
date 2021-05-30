@@ -217,10 +217,14 @@ STORE CARD
   margin-right: 1rem;
   margin-bottom: 1rem;
   text-align: center;
+  overflow: hidden;
 }
 
 .store-card img {
-  width: 80%;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  margin-bottom: 1rem;
 }
 
 .store-card h2 {
@@ -229,28 +233,6 @@ STORE CARD
 
 /*=================================================
 CATEGORY CARD
-
-.image {
-  position: relative;
-  height: 300px;
-  width: 300px;
-  background: url(http://lorempixel.com/300/300);
-}
-.image:before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  transition: all 0.8s;
-  opacity: 0;
-  background: url(http://lorempixel.com/300/200);
-  background-size: 100% 100%;
-}
-.image:hover:before {
-  opacity: 0.8;
-}
 =================================================*/
 .category-card {
   width: 260px;

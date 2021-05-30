@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 
 import { listItems, createItem } from '../actions/itemActions'
-import { Link } from 'react-router-dom'
 
 const ItemScreen = ({ match }) => {
   const dispatch = useDispatch()

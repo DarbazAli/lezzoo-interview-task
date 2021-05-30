@@ -10,7 +10,7 @@ const Header = () => {
           <img src={logo} alt='Lezzoo Logo' width='32' /> <h3>Lezzoo</h3>
         </Link>
 
-        <Link to='/stores'>Stores</Link>
+        <Link to='/'>Stores</Link>
       </nav>
     </header>
   )
