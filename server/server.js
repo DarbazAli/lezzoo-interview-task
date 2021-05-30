@@ -8,7 +8,8 @@ import storeRoutes from './routes/storeRoutes.js'
 import categoryRoutes from './routes/categoryRoutes.js'
 import itemRoutes from './routes/itemRoutes.js'
 import uploadRoute from './routes/uploadRoute.js'
-
+import authUser from './utils/authUser.js'
+import protect from './utils/authMiddleware.js'
 const app = express()
 
 /* 
@@ -53,10 +54,10 @@ app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
 /*=================================================
 USING ROUTES MIDDLEWARES
 =================================================*/
-app.get('/', (req, res) => {
+app.get('/', protect, (req, res) => {
   res.send('API IS WORKING')
 })
-
+app.post('/api/user/login', authUser)
 app.use('/api/stores', storeRoutes)
 app.use('/api/category', categoryRoutes)
 app.use('/api/item', itemRoutes)
