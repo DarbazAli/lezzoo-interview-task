@@ -1,8 +1,6 @@
 'use strict'
 
 import express from 'express'
-import cool from 'cool-ascii-faces'
-// import morgan from 'morgan'
 import path from 'path'
 
 import storeRoutes from './routes/storeRoutes.js'
@@ -23,11 +21,6 @@ const __dirname = path.resolve()
 /*=================================================
 APP SETTINGS
 =================================================*/
-// use morgan logger for dev env
-// if (env === 'development') {
-//   console.clear()
-//   app.use(morgan('dev'))
-// }
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
@@ -55,8 +48,6 @@ app.use('/api/stores', storeRoutes)
 app.use('/api/category', categoryRoutes)
 app.use('/api/item', itemRoutes)
 app.use('/api/upload', uploadRoute)
-
-app.get('/cool', (req, res) => res.send(cool()))
 
 /*=================================================
 LISTEN FOR REQUESTS ON THE AVAILABLE PORT NUMBER
