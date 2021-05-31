@@ -10,8 +10,11 @@ const connection = mysql.createConnection({
 
 // open the connection
 connection.connect((err) => {
-  if (err) throw err
-  console.log('MYSQL is connected successfully')
+  if (err) {
+    if (err) throw err
+  } else {
+    console.log('MYSQL is connected successfully')
+  }
 })
 
 export default connection
