@@ -14,12 +14,12 @@ const HomeScreen = ({ history }) => {
 
   const fileEl = useRef(null)
 
-  const storeListState = useSelector((state) => state.storeList)
-  const { loading, storeList, error } = storeListState
+  const storeListReducerState = useSelector((state) => state.storeListReducer)
+  const { loading, storeListState, error } = storeListReducerState
   const { success } = useSelector((state) => state.storeCreate)
 
   // log storeList to console
-  console.log(storeList)
+  console.log(storeListState)
 
   const { userInfo } = useSelector((state) => state.userLogin)
 
@@ -84,7 +84,7 @@ const HomeScreen = ({ history }) => {
             <h1>Stores</h1>
 
             <div className='stores'>
-              {storeList.map((store) => (
+              {storeListState.map((store) => (
                 <Link
                   to={`/store/${store.id}`}
                   key={store.id}

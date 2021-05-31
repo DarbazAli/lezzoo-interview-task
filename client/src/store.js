@@ -11,7 +11,7 @@ import { itemCreateReducer, itemListReducer } from './reducers/itemReducers'
 import { userLoginReducer } from './reducers/userReducer'
 
 const reducers = combineReducers({
-  storeList: storeListReducer,
+  storeListReducer: storeListReducer,
   storeCreate: storeCreateReducer,
   categoryList: categoryListReducer,
   categoryCreate: categoryCreateReducer,

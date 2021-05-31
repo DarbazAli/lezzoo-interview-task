@@ -9,14 +9,14 @@ import {
 } from '../constants/storeConstants'
 
 // Get all stores
-export const storeListReducer = (state = { storeList: [] }, action) => {
+export const storeListReducer = (state = { storeListState: [] }, action) => {
   switch (action.type) {
     case STORE_LIST_REQUEST:
-      return { loading: true, storeList: [] }
+      return { loading: true, storeListState: [] }
     case STORE_LIST_SUCCESS:
       return {
         loading: false,
-        storeList: action.payload,
+        storeListState: action.payload,
       }
     case STORE_LIST_FAIL:
       return { loading: false, error: action.payload }
