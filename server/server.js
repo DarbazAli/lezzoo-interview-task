@@ -35,7 +35,7 @@ if (env === 'production') {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
   })
 } else {
-  app.get('/', (req, res) => {
+  app.get('/', protect, (req, res) => {
     res.send('API IS WORKING')
   })
 }

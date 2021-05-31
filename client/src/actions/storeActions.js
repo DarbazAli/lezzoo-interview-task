@@ -16,7 +16,7 @@ export const listStores = () => async (dispatch) => {
 
     dispatch({
       type: STORE_LIST_SUCCESS,
-      payload: data,
+      payload: Array.from(data),
     })
   } catch (error) {
     dispatch({
