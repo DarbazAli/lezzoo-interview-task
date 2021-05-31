@@ -2,6 +2,7 @@
 
 import express from 'express'
 import path from 'path'
+import dotenv from 'dotenv'
 
 import storeRoutes from './routes/storeRoutes.js'
 import categoryRoutes from './routes/categoryRoutes.js'
@@ -10,6 +11,8 @@ import uploadRoute from './routes/uploadRoute.js'
 import authUser from './utils/authUser.js'
 import protect from './utils/authMiddleware.js'
 const app = express()
+
+dotenv.config()
 
 /*=================================================
 ENV VARIABLES
@@ -25,14 +28,14 @@ APP SETTINGS
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-if (process.env.NODE_ENV === 'production') {
+if (env === 'production') {
   app.use(express.static(path.join(__dirname, '/client/build')))
 
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
   })
 } else {
-  app.get('/', protect, (req, res) => {
+  app.get('/', (req, res) => {
     res.send('API IS WORKING')
   })
 }
