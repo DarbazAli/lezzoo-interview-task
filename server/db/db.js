@@ -17,4 +17,8 @@ connection.connect((err) => {
   }
 })
 
+setInterval(function () {
+  connection.query('SELECT 1')
+}, 5000)
+
 export default connection
