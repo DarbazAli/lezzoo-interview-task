@@ -6,7 +6,6 @@ import { logout } from '../actions/userAction'
 const Header = () => {
   const dispatch = useDispatch()
   const { userInfo } = useSelector((state) => state.userLogin)
-  console.log(userInfo)
 
   const logoutHandler = () => {
     dispatch(logout())
@@ -22,7 +21,7 @@ const Header = () => {
           <Link to='/store'>Stores</Link>
 
           {userInfo && (
-            <Link to={null} onClick={logoutHandler}>
+            <Link to='/' onClick={logoutHandler}>
               Logout
             </Link>
           )}

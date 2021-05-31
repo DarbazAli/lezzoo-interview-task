@@ -9,8 +9,6 @@ const ItemScreen = ({ match }) => {
   const dispatch = useDispatch()
   const categoryID = match.params.id
 
-  console.log(categoryID)
-
   const [name, setName] = useState('')
   const [image, setImage] = useState('')
   const [price, setPrice] = useState(0)

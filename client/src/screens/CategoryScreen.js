@@ -91,9 +91,9 @@ const CategoryScreen = ({ match }) => {
                 key={category.id}
                 className='category-card'
               >
-                <div class='image-container'>
+                <div className='image-container'>
                   <img src={category.image} alt={category.name} />
-                  <div class='after'></div>
+                  <div className='after'></div>
                 </div>
                 {/* <img src={category.image} alt={category.name} /> */}
 

@@ -17,6 +17,9 @@ const HomeScreen = ({ history }) => {
   const { loading, stores, error } = useSelector((state) => state.storeList)
   const { success } = useSelector((state) => state.storeCreate)
 
+  // log stores to console
+  console.log(stores)
+
   const { userInfo } = useSelector((state) => state.userLogin)
 
   useEffect(() => {
