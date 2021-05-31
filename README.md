@@ -4,8 +4,6 @@
 
 **Dev server** `npm run dev` in the root directory
 
-## [Live app](https://lezzoo-admin-panel.herokuapp.com).
-
 ### DB Modeling
 
 ```
