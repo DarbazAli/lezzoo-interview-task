@@ -14,7 +14,8 @@ const HomeScreen = ({ history }) => {
 
   const fileEl = useRef(null)
 
-  const { loading, storeList, error } = useSelector((state) => state.storeList)
+  const storeListState = useSelector((state) => state.storeList)
+  const { loading, storeList, error } = storeListState
   const { success } = useSelector((state) => state.storeCreate)
 
   // log storeList to console
